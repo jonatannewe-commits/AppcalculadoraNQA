@@ -2,478 +2,241 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Módulo NQA | Plano de Amostragem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema NQA Profissional | Qualidade Têxtil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --success: #059669;
+            --danger: #dc2626;
+            --border: #e2e8f0;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(145deg, #e9eef3 0%, #dce2ea 100%);
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif;
-            min-height: 100vh;
-            padding: 30px 20px;
+            background-color: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--primary);
             display: flex;
             justify-content: center;
-            align-items: center;
+            padding: 40px 20px;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 750px;
-            width: 100%;
-            margin: 0 auto;
-        }
+        .container { max-width: 800px; width: 100%; }
 
-        /* Card principal */
         .card {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 40px;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3);
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             overflow: hidden;
-            backdrop-filter: blur(0px);
-            border: 1px solid rgba(255,255,255,0.6);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
+            border: 1px solid var(--border);
         }
 
         .card-header {
-            padding: 28px 30px 16px 30px;
-            border-bottom: 2px solid #eef2f8;
-            background: #ffffff;
+            background: var(--primary);
+            padding: 32px;
+            color: white;
+            text-align: center;
         }
 
-        .card-header h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1f2b3c, #2c3e50);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
+        .card-header h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .card-header p { opacity: 0.8; font-size: 0.875rem; }
 
-        .sub {
-            font-size: 0.8rem;
-            color: #5a6e85;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .content { padding: 32px; }
 
-        .badge {
-            background: #eef2ff;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #1e4a76;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 32px; }
 
-        /* Formulário */
-        .nqa-form {
-            padding: 28px 30px 32px 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #64748b; }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-        }
-
-        .input-group {
-            flex: 1;
-            min-width: 200px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .input-group label {
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: #2c3e50;
-        }
-
-        .input-group input,
-        .input-group select {
-            background: #f8fafc;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 28px;
-            padding: 12px 18px;
-            font-size: 0.95rem;
+        input, select {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            font-size: 1rem;
             font-weight: 500;
+            color: var(--primary);
             transition: all 0.2s;
-            font-family: inherit;
             outline: none;
         }
 
-        .input-group input:focus,
-        .input-group select:focus {
-            border-color: #2c3e50;
-            box-shadow: 0 0 0 3px rgba(44,62,80,0.2);
-            background: white;
-        }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 
-        /* Botão */
-        .btn-primary {
-            background: #2c3e50;
-            color: white;
-            border: none;
-            padding: 16px 20px;
-            border-radius: 44px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            margin-top: 8px;
-            font-family: inherit;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        .btn-primary:hover {
-            background: #1e2f3e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .btn-primary:active {
-            transform: translateY(1px);
-        }
-
-        /* Resultado */
-        .result-card {
-            background: #f0f4fa;
-            border-radius: 28px;
-            padding: 20px;
-            margin-top: 8px;
-            border-left: 6px solid #2c3e50;
-            transition: 0.2s;
-        }
-
-        .result-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            font-weight: 500;
-            border-bottom: 1px dashed #cdd9ed;
-            font-size: 0.95rem;
-        }
-
-        .result-highlight {
-            font-weight: 800;
-            color: #0a3e5c;
-            font-size: 1.05rem;
-            background: #e9edf2;
-            padding: 2px 12px;
-            border-radius: 40px;
-        }
-
-        hr {
-            margin: 12px 0;
-            border: 0;
-            height: 1px;
-            background: #dce5f0;
-        }
-
-        .info-note {
-            background: #e6f0fa;
+        .results-container {
+            background: #f8fafc;
             border-radius: 20px;
-            padding: 10px 16px;
-            font-size: 0.75rem;
-            color: #1e4a76;
-            text-align: center;
-            margin-top: 8px;
+            padding: 24px;
+            border: 1px solid var(--border);
         }
 
-        .footer {
+        .result-main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
-            font-size: 0.7rem;
-            color: #5b6e8c;
-            margin-top: 24px;
-            padding-bottom: 10px;
+            border: 1px solid var(--border);
         }
 
-        @media (max-width: 580px) {
-            .card-header h1 {
-                font-size: 1.5rem;
-            }
-            .result-line {
-                flex-direction: column;
-                gap: 6px;
-            }
-            .result-highlight {
-                align-self: flex-start;
-            }
+        .result-label { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 8px; }
+        .result-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+
+        .decision-rule {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-left: 4px solid var(--accent);
         }
+
+        .status-pill { padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 0.8rem; }
+        .status-accept { background: #dcfce7; color: var(--success); }
+        .status-reject { background: #fee2e2; color: var(--danger); }
+
+        .footer-note { font-size: 0.75rem; color: #94a3b8; text-align: center; margin-top: 24px; }
+
+        @media (max-width: 600px) { .result-main { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h1>📊 Módulo NQA</h1>
-            <div class="sub">
-                <span>Plano de amostragem para controle de qualidade</span>
-                <span class="badge">NBR 5426 / MIL-STD-105E</span>
-            </div>
+            <h1>MÓDULO DE INSPEÇÃO NQA</h1>
+            <p>Calculador de Amostragem Industrial Baseado na NBR 5426</p>
         </div>
-        <div class="nqa-form">
-            <div class="row">
+        
+        <div class="content">
+            <div class="grid">
                 <div class="input-group">
-                    <label>📦 Tamanho do Lote</label>
-                    <input type="number" id="lote" placeholder="Ex: 5000" value="3200">
+                    <label>Tamanho do Lote</label>
+                    <input type="number" id="lote" value="3200" oninput="calcular()">
                 </div>
                 <div class="input-group">
-                    <label>🔍 Nível de Inspeção Geral</label>
-                    <select id="nivel">
-                        <option value="I">Nível I (Menos rigoroso)</option>
-                        <option value="II" selected>Nível II (Normal)</option>
-                        <option value="III">Nível III (Rigoroso)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-group">
-                    <label>🎯 Nível Especial (opcional)</label>
-                    <select id="especial">
-                        <option value="">Nenhum (usar geral)</option>
-                        <option value="S1">S1 - Especial</option>
-                        <option value="S2">S2 - Especial</option>
-                        <option value="S3">S3 - Especial</option>
-                        <option value="S4">S4 - Especial</option>
+                    <label>Nível de Inspeção</label>
+                    <select id="nivel" onchange="calcular()">
+                        <optgroup label="Geral">
+                            <option value="GI">Nível Geral I</option>
+                            <option value="GII" selected>Nível Geral II (Padrão)</option>
+                            <option value="GIII">Nível Geral III</option>
+                        </optgroup>
+                        <optgroup label="Especial (Ensaios Destrutivos)">
+                            <option value="S1">Especial S-1</option>
+                            <option value="S2">Especial S-2</option>
+                            <option value="S3">Especial S-3</option>
+                            <option value="S4">Especial S-4</option>
+                        </optgroup>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>⚠️ NQA (%) - Limite de Aceitação</label>
-                    <select id="nqa">
-                        <option value="0.65">0,65 % (Crítico)</option>
-                        <option value="1.0">1,0 %</option>
-                        <option value="1.5">1,5 %</option>
-                        <option value="2.5" selected>2,5 % (Padrão)</option>
-                        <option value="4.0">4,0 %</option>
-                        <option value="6.5">6,5 %</option>
+                    <label>NQA (%) Desejado</label>
+                    <select id="nqa" onchange="calcular()">
+                        <option value="0.65">0,65 (Crítico)</option>
+                        <option value="1.0">1,0</option>
+                        <option value="1.5">1,5</option>
+                        <option value="2.5" selected>2,5 (Padrão)</option>
+                        <option value="4.0">4,0</option>
                     </select>
                 </div>
             </div>
-            <button class="btn-primary" id="calcularBtn">📐 Calcular Plano de Amostragem</button>
-            <div id="resultadoArea" class="result-card">
-                <div class="result-line">✅ Preencha os dados e clique em calcular.</div>
-            </div>
-            <div class="info-note">
-                💡 <strong>Ac</strong> = Número máximo de defeitos para aceitar o lote.<br>
-                <strong>Re</strong> = Ac + 1 (número mínimo de defeitos para rejeição).
-            </div>
+
+            <div class="results-container" id="resultadoArea">
+                </div>
+
+            <p class="footer-note">
+                Referência Técnica: MIL-STD-105E / NBR 5426 | Plano de Amostragem Simples - Inspeção Normal
+            </p>
         </div>
-    </div>
-    <div class="footer">
-        Baseado nas tabelas de amostragem MIL-STD-105E / NBR 5426 | Planos para NQA
     </div>
 </div>
 
 <script>
-    // ============================================================
-    // MÓDULO NQA - COMPLETO E FUNCIONAL
-    // ============================================================
-
-    // Função para determinar o código da amostra com base no lote, nível geral e especial
-    function obterCodigoAmostra(lote, nivelGeral, nivelEspecial) {
-        const isEspecial = (nivelEspecial !== "" && nivelEspecial !== "Nenhum");
+    function obterLetraCodigo(lote, nivel) {
+        // Matriz de Letras-Código (Simplificada conforme NBR 5426)
+        const faixas = [2, 8, 15, 25, 50, 90, 150, 280, 500, 1200, 3200, 10000, 35000, 150000, 500000];
         
-        // Tabela especial reduzida (S1 a S4)
-        if (isEspecial) {
-            if (lote <= 50) return "A";
-            if (lote <= 150) return "B";
-            if (lote <= 500) return "C";
-            if (lote <= 1200) return "D";
-            if (lote <= 3200) return "E";
-            if (lote <= 10000) return "F";
-            if (lote <= 35000) return "G";
-            return "H";
-        }
-        
-        // Níveis Gerais I, II, III (conforme normas)
-        if (nivelGeral === "I") {
-            if (lote <= 50) return "A";
-            if (lote <= 150) return "B";
-            if (lote <= 500) return "C";
-            if (lote <= 1200) return "D";
-            if (lote <= 3200) return "E";
-            if (lote <= 10000) return "F";
-            if (lote <= 35000) return "G";
-            return "H";
-        } 
-        else if (nivelGeral === "II") {
-            if (lote <= 50) return "B";
-            if (lote <= 150) return "C";
-            if (lote <= 500) return "D";
-            if (lote <= 1200) return "E";
-            if (lote <= 3200) return "F";
-            if (lote <= 10000) return "G";
-            if (lote <= 35000) return "H";
-            return "J";
-        } 
-        else { // Nível III
-            if (lote <= 50) return "C";
-            if (lote <= 150) return "D";
-            if (lote <= 500) return "E";
-            if (lote <= 1200) return "F";
-            if (lote <= 3200) return "G";
-            if (lote <= 10000) return "H";
-            if (lote <= 35000) return "J";
-            return "K";
-        }
-    }
-
-    // Tabela de tamanhos de amostra por código
-    function tamanhoAmostraPorCodigo(codigo) {
         const tabela = {
-            "A": 2,
-            "B": 3,
-            "C": 5,
-            "D": 8,
-            "E": 13,
-            "F": 20,
-            "G": 32,
-            "H": 50,
-            "J": 80,
-            "K": 125
+            'S1': ['A','A','A','A','A','A','B','B','B','C','C','D','D','E','E'],
+            'S2': ['A','A','A','A','B','B','B','C','C','D','D','E','E','F','G'],
+            'S3': ['A','A','B','B','B','C','C','D','D','E','E','F','G','H','J'],
+            'S4': ['A','A','B','B','C','C','D','E','E','F','G','H','J','K','L'],
+            'GI': ['A','A','B','C','C','D','E','F','G','H','J','K','L','M','N'],
+            'GII':['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q'],
+            'GIII':['B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R']
         };
-        return tabela[codigo] || 50;
+
+        let idx = faixas.findIndex(f => lote <= f);
+        if (idx === -1) idx = 14; // Acima de 500.000
+
+        return tabela[nivel][idx];
     }
 
-    // Cálculo de Aceitação (Ac) e Rejeição (Re) baseado no NQA (%)
-    function calcularAcRe(amostra, nqaPercent) {
-        let ac = Math.floor(amostra * (nqaPercent / 100));
-        // Garantir que Ac nunca seja negativo
-        if (ac < 0) ac = 0;
+    function getDadosAmostra(letra) {
+        const amostras = {
+            'A': 2, 'B': 3, 'C': 5, 'D': 8, 'E': 13, 'F': 20, 'G': 32, 'H': 50,
+            'J': 80, 'K': 125, 'L': 200, 'M': 315, 'N': 500, 'P': 800, 'Q': 1250, 'R': 2000
+        };
+        return amostras[letra] || 13;
+    }
+
+    function calcular() {
+        const lote = parseInt(document.getElementById('lote').value) || 0;
+        const nivel = document.getElementById('nivel').value;
+        const nqa = parseFloat(document.getElementById('nqa').value);
+
+        if (lote <= 0) return;
+
+        const letra = obterLetraCodigo(lote, nivel);
+        let n = getDadosAmostra(letra);
+        if (n > lote) n = lote;
+
+        // Cálculo de Ac (Simplificado para fins didáticos/operacionais rápidos)
+        // Em um sistema real, aqui entraria a consulta à Tabela II-A da norma
+        let ac = Math.floor(n * (nqa / 100));
         let re = ac + 1;
-        return { ac, re };
-    }
 
-    // Função principal de cálculo e exibição
-    function calcularPlanoNQA() {
-        // Obter valores dos campos
-        const loteInput = document.getElementById("lote").value;
-        const nivelGeral = document.getElementById("nivel").value;
-        const nivelEspecial = document.getElementById("especial").value;
-        const nqaPercent = parseFloat(document.getElementById("nqa").value);
-        
-        // Validação do lote
-        let lote = parseInt(loteInput, 10);
-        if (isNaN(lote) || lote <= 0) {
-            document.getElementById("resultadoArea").innerHTML = `
-                <div class="result-line" style="color:#b91c1c; justify-content:center;">
-                    ❌ Lote inválido. Digite um número inteiro positivo.
+        const container = document.getElementById('resultadoArea');
+        container.innerHTML = `
+            <div class="result-main">
+                <div class="result-box">
+                    <div class="result-label">Letra-Código</div>
+                    <div class="result-value">${letra}</div>
                 </div>
-            `;
-            return;
-        }
-        
-        // Obter código da amostra
-        let codigo = obterCodigoAmostra(lote, nivelGeral, nivelEspecial);
-        let amostra = tamanhoAmostraPorCodigo(codigo);
-        
-        // Ajuste: se o tamanho da amostra for maior que o lote, limitar ao lote
-        if (amostra > lote) {
-            amostra = lote;
-        }
-        
-        // Calcular Ac e Re
-        const { ac, re } = calcularAcRe(amostra, nqaPercent);
-        
-        // Determinar string descritiva do nível aplicado
-        let nivelAplicado = "";
-        if (nivelEspecial && nivelEspecial !== "" && nivelEspecial !== "Nenhum") {
-            nivelAplicado = `Especial ${nivelEspecial}`;
-        } else {
-            nivelAplicado = `Geral ${nivelGeral}`;
-        }
-        
-        // Mensagem de recomendação baseada no Ac
-        let recomendacao = "";
-        if (ac === 0) {
-            recomendacao = "🔴 Critério extremamente severo: zero defeitos permitidos na amostra. Recomendado para produtos críticos.";
-        } else if (ac <= 2) {
-            recomendacao = "🟡 Plano restritivo, alta exigência de qualidade. Controle rigoroso necessário.";
-        } else {
-            recomendacao = "🟢 Plano normal de amostragem. Adequado para a maioria dos processos produtivos.";
-        }
-        
-        // Montar HTML do resultado
-        const htmlResultado = `
-            <div class="result-line">
-                <span>📌 Código da Amostra:</span>
-                <span class="result-highlight">${codigo}</span>
+                <div class="result-box">
+                    <div class="result-label">Tam. Amostra (n)</div>
+                    <div class="result-value">${n}</div>
+                </div>
             </div>
-            <div class="result-line">
-                <span>🔬 Tamanho da Amostra (n):</span>
-                <span class="result-highlight">${amostra} unidade(s)</span>
+            <div class="decision-rule">
+                <div>
+                    <span class="status-pill status-accept">ACEITAR (Ac)</span>
+                    <span style="font-weight:800; margin-left:8px;">${ac} defeitos</span>
+                </div>
+                <div style="color: #cbd5e1;">|</div>
+                <div>
+                    <span class="status-pill status-reject">REJEITAR (Re)</span>
+                    <span style="font-weight:800; margin-left:8px;">${re} defeitos</span>
+                </div>
             </div>
-            <div class="result-line">
-                <span>✅ Aceitação (Ac):</span>
-                <span class="result-highlight">${ac} defeito(s)</span>
-            </div>
-            <div class="result-line">
-                <span>❌ Rejeição (Re):</span>
-                <span class="result-highlight">${re} defeito(s)</span>
-            </div>
-            <hr>
-            <div class="result-line">
-                <span>📊 Nível aplicado:</span>
-                <span>${nivelAplicado}</span>
-            </div>
-            <div class="result-line">
-                <span>🎯 NQA (Nível de Qualidade Aceitável):</span>
-                <span>${nqaPercent} %</span>
-            </div>
-            <div class="result-line">
-                <span>📋 Regra decisória:</span>
-                <span>Se defeitos ≤ ${ac} → <strong style="color:#15803d;">ACEITAR lote</strong> &nbsp;|&nbsp; Se defeitos ≥ ${re} → <strong style="color:#b91c1c;">REJEITAR lote</strong></span>
-            </div>
-            <div style="margin-top: 14px; background:#e4eaf1; border-radius: 20px; padding: 8px 12px; font-size:0.8rem;">
-                ${recomendacao}
+            <div style="margin-top:20px; font-size:0.85rem; color:#64748b; text-align:center;">
+                Para um lote de <strong>${lote.toLocaleString()}</strong>, inspecione <strong>${n}</strong> peças aleatórias.
             </div>
         `;
-        
-        document.getElementById("resultadoArea").innerHTML = htmlResultado;
     }
-    
-    // Inicialização e eventos
-    document.addEventListener("DOMContentLoaded", () => {
-        // Vincular evento do botão calcular
-        const btnCalcular = document.getElementById("calcularBtn");
-        if (btnCalcular) {
-            btnCalcular.addEventListener("click", calcularPlanoNQA);
-        }
-        
-        // Permitir calcular pressionando Enter no campo lote
-        const campoLote = document.getElementById("lote");
-        if (campoLote) {
-            campoLote.addEventListener("keypress", (event) => {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    calcularPlanoNQA();
-                }
-            });
-        }
-        
-        // Executar um cálculo inicial com valores padrão (exemplo)
-        calcularPlanoNQA();
-    });
+
+    // Inicializa
+    window.onload = calcular;
 </script>
+
 </body>
 </html>
